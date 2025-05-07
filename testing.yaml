@@ -16,12 +16,12 @@ repositories:
 releases:
   - name: apache
     chart: bitnami/apache
-    version: 11.3.5
+    version: 10.9.2
     namespace: {{ .Values.namespace }}
     values:
       - ingress:
           enabled: true
-          hostname: apache.{{ .Values.baseDomain }}
+          hostname: {{ .Values.baseDomain }}
           ingressClassName: nginx
           path: /
       - pdb:
