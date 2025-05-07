@@ -8,6 +8,7 @@ environments:
 
 helmDefaults:
   wait: false
+  createNamespace: false
 
 repositories:
   - name: bitnami
