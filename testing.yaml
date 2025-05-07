@@ -2,7 +2,7 @@ environments:
   default:
     values:
       - baseDomain: 
-      - namespace: 
+        namespace: 
 
 ---
 
