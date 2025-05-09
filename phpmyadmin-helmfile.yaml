@@ -1,0 +1,28 @@
+environments:
+  default:
+    values:
+      - baseDomain: 
+        dbHost: 
+        namespace: 
+
+---
+
+helmDefaults:
+  wait: false
+  createNamespace: false
+
+releases:
+  - name: phpmyadmin
+    chart: oci://registry-1.docker.io/bitnamicharts/phpmyadmin
+    version: 18.1.7
+    namespace: {{ .Values.namespace }}
+    values:
+      - db:
+          host : {{ .Values.dbHost }}
+      - ingress:
+          enabled: true
+          hostname: {{ .Values.baseDomain }}
+          ingressClassName: nginx
+    labels:
+      app: phpmyadmin
+

@@ -1,0 +1,27 @@
+environments:
+  default:
+    values:
+      - namespace: 
+        rootPassword: 
+        database: 
+
+---
+
+helmDefaults:
+  wait: false
+  createNamespace: false
+
+releases:
+  - name: mariadb
+    chart: oci://registry-1.docker.io/bitnamicharts/mariadb
+    version: 20.5.5
+    namespace: {{ .Values.namespace }}
+    values:
+      - auth:
+          database: {{ .Values.database }}
+          rootPassword: {{ .Values.rootPassword }}
+      - primary:
+          persistence:
+            size: 4Gi
+    labels:
+      app: mariadb

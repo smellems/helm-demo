@@ -10,13 +10,9 @@ helmDefaults:
   wait: false
   createNamespace: false
 
-repositories:
-  - name: bitnami
-    url: https://charts.bitnami.com/bitnami
-
 releases:
   - name: apache
-    chart: bitnami/apache
+    chart: oci://registry-1.docker.io/bitnamicharts/apache
     version: 10.9.2
     namespace: {{ .Values.namespace }}
     values:
@@ -24,7 +20,6 @@ releases:
           enabled: true
           hostname: {{ .Values.baseDomain }}
           ingressClassName: nginx
-          path: /
       - pdb:
           create: true
     labels:
