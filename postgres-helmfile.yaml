@@ -1,0 +1,26 @@
+environments:
+  default:
+    values:
+      - namespace: 
+        postgresPassword: 
+        database: 
+
+---
+
+helmDefaults:
+  wait: false
+  createNamespace: false
+
+releases:
+  - name: postgresql
+    chart: oci://registry-1.docker.io/bitnamicharts/postgresql
+    version: 16.7.3
+    namespace: {{ .Values.namespace }}
+    values:
+      - auth:
+          database: {{ .Values.database }}
+          postgresPassword: {{ .Values.postgresPassword }}
+      - persistence:
+          size: 4Gi
+    labels:
+      app: postgresql
